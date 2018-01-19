@@ -63,11 +63,6 @@ def main():
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
 
-        #You can move the coordinates around if you want
-        draw_sun(screen, 40, 40)
-        draw_house(screen, 500, 220)
-        draw_cat(200, 430)
- 
         # DRAW CODE END
  
         # Update the screen with what we've drawn.
