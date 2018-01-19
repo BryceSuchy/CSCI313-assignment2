@@ -29,14 +29,22 @@ RED = (255, 0, 0)
 # Width and height of the screen (width,height)
 size = (700, 500)
 
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+ 
 
+def draw_house(screen):
+    pygame.draw.rect(screen, BLACK, [40,40,100,100], 2)
+    pygame.draw.polygon(screen, BLACK, [[40,40], [140,40],[90,0]], 2)
 def main():
     """ Main function for the game. """
     pygame.init()
- 
     # Set the width and height of the screen [width,height]
     screen = pygame.display.set_mode(size)
- 
+
     pygame.display.set_caption("My Game")
  
     # Loop until the user clicks the close button.
@@ -62,7 +70,7 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
-
+        draw_house(screen)
         # DRAW CODE END
  
         # Update the screen with what we've drawn.
@@ -70,7 +78,7 @@ def main():
  
         # Limit to 60 frames per second
         clock.tick(60)
- 
+
     # Close the window and quit.
     # If you forget this line, the program will 'hang'
     # on exit if running from IDLE.
