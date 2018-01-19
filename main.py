@@ -28,6 +28,12 @@ RED = (255, 0, 0)
 
 # Width and height of the screen (width,height)
 size = (700, 500)
+GREY = (211,211,211)
+PINK = (255,192,203)
+def draw_cat(screen,x,y):
+            pygame.draw.ellipse(screen, GREY, [50+x,50+y,225,175], 0)
+            pygame.draw.polygon(screen, GREY, [[60+x,100+y], [135+x,55+y], [75+x,20+y]], 0)
+            pygame.draw.polygon(screen, GREY, [[200+x,55+y], [265+x,120+y], [275+x,20+y]], 0)
 
 
 def main():
@@ -62,6 +68,8 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
+        draw_cat(screen,100,100)
+        
 
         # DRAW CODE END
  
