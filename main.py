@@ -25,13 +25,15 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+YELLOW = (255,255,0)
+GREY = (211,211,211)
+PINK = (255,192,203)
 
 # Width and height of the screen (width,height)
 size = (700, 500)
-GREY = (211,211,211)
-PINK = (255,192,203)
+
+# Callahan Stewart
 def draw_cat(screen,x,y):
-            
             pygame.draw.polygon(screen, GREY, [[60+x,100+y], [125+x,55+y], [60+x,35+y]], 0)#Left Ear
             pygame.draw.polygon(screen, PINK, [[65+x,100+y], [115+x,65+y], [65+x,50+y]], 0)
             pygame.draw.polygon(screen, GREY, [[200+x,55+y], [265+x,120+y], [275+x,40+y]], 0)#Right Ear
@@ -49,17 +51,32 @@ def draw_cat(screen,x,y):
             pygame.draw.ellipse(screen, WHITE, [110+x+z,94+y,10,10], 0) #white light speckles
             pygame.draw.ellipse(screen, WHITE, [123+x+z,98+y,10,10], 0)
             pygame.draw.ellipse(screen, WHITE, [122+x+z,95+y,5,5], 0)
+            
+# josh zickermann
+def draw_house(screen, x, y):
+    pygame.draw.rect(screen, BLACK, [40+x,40+y,100,100], 2)
+    pygame.draw.polygon(screen, BLACK, [[40+x,40+y], [140+x,40+y],[92.5+x,0+y]])
+    pygame.draw.rect(screen, BLUE, [60+x,65+y,20,20])
+    pygame.draw.rect(screen, BLUE, [100+x,65+y,20,20])
+    pygame.draw.rect(screen, RED, [80+x,100+y,20,40])
 
-            
-            
+# Made by Bryce Suchy
+def draw_sun(screen, x, y):
+    pygame.draw.circle(screen,YELLOW,[200+x,200+y],80, 80)
+    pygame.draw.polygon(screen, YELLOW, [[100+x, 100+y], [115+x, 200+y], [200+x, 115+y]], 10)
+    pygame.draw.polygon(screen, YELLOW, [[200+x, 280+y], [115+x, 200+y], [90+x, 250+y]], 10)
+    pygame.draw.polygon(screen, YELLOW, [[275+x, 200+y], [300+x, 50+y], [200+x, 115+y]], 10)
+    pygame.draw.polygon(screen, YELLOW, [[275+x, 200+y], [275+x, 320+y], [200+x, 280+y]], 10)
+    pygame.draw.line(screen, YELLOW, [215+x, 225+y], [370+x,215+y], 10)
+    pygame.draw.line(screen, YELLOW, [215+x, 150+y], [370+x,215+y], 10)
 
 def main():
     """ Main function for the game. """
+    
     pygame.init()
- 
     # Set the width and height of the screen [width,height]
     screen = pygame.display.set_mode(size)
- 
+
     pygame.display.set_caption("My Game")
  
     # Loop until the user clicks the close button.
@@ -86,7 +103,9 @@ def main():
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
         draw_cat(screen,100,100)
-        
+        #josh zickermann
+        draw_house(screen, 500, 300)
+        draw_sun(screen, 350, -50)
 
         # DRAW CODE END
  
@@ -95,7 +114,7 @@ def main():
  
         # Limit to 60 frames per second
         clock.tick(60)
- 
+
     # Close the window and quit.
     # If you forget this line, the program will 'hang'
     # on exit if running from IDLE.
