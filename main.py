@@ -25,13 +25,24 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+YELLOW = (255,255,0)
 
 # Width and height of the screen (width,height)
 size = (700, 500)
 
+# Made by Bryce Suchy
+def draw_sun(screen, x, y):
+    pygame.draw.circle(screen,YELLOW,[200+x,200+y],80, 80)
+    pygame.draw.polygon(screen, YELLOW, [[100+x, 100+y], [115+x, 200+y], [200+x, 115+y]], 10)
+    pygame.draw.polygon(screen, YELLOW, [[200+x, 280+y], [115+x, 200+y], [90+x, 250+y]], 10)
+    pygame.draw.polygon(screen, YELLOW, [[275+x, 200+y], [300+x, 50+y], [200+x, 115+y]], 10)
+    pygame.draw.polygon(screen, YELLOW, [[275+x, 200+y], [275+x, 320+y], [200+x, 280+y]], 10)
+    pygame.draw.line(screen, YELLOW, [215+x, 225+y], [370+x,215+y], 10)
+    pygame.draw.line(screen, YELLOW, [215+x, 150+y], [370+x,215+y], 10)
 
 def main():
     """ Main function for the game. """
+    
     pygame.init()
  
     # Set the width and height of the screen [width,height]
@@ -62,7 +73,7 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
-
+        draw_sun(screen, 350, -50)
         # DRAW CODE END
  
         # Update the screen with what we've drawn.
@@ -70,7 +81,7 @@ def main():
  
         # Limit to 60 frames per second
         clock.tick(60)
- 
+    
     # Close the window and quit.
     # If you forget this line, the program will 'hang'
     # on exit if running from IDLE.
