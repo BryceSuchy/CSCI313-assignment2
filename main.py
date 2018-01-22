@@ -30,6 +30,7 @@ YELLOW = (255,255,0)
 # Width and height of the screen (width,height)
 size = (700, 500)
 
+# Made by Bryce Suchy
 def draw_sun(screen, x, y):
     pygame.draw.circle(screen,YELLOW,[200+x,200+y],80, 80)
     pygame.draw.polygon(screen, YELLOW, [[100+x, 100+y], [115+x, 200+y], [200+x, 115+y]], 10)
