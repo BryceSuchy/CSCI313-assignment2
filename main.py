@@ -35,10 +35,13 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
  
-
-def draw_house(screen):
-    pygame.draw.rect(screen, BLACK, [40,40,100,100], 2)
-    pygame.draw.polygon(screen, BLACK, [[40,40], [140,40],[90,0]], 2)
+# josh zickermann
+def draw_house(screen, x, y):
+    pygame.draw.rect(screen, BLACK, [40+x,40+y,100,100], 2)
+    pygame.draw.polygon(screen, BLACK, [[40+x,40+y], [140+x,40+y],[92.5+x,0+y]])
+    pygame.draw.rect(screen, BLUE, [60+x,65+y,20,20])
+    pygame.draw.rect(screen, BLUE, [100+x,65+y,20,20])
+    pygame.draw.rect(screen, RED, [80+x,100+y,20,40])
 def main():
     """ Main function for the game. """
     pygame.init()
@@ -70,7 +73,8 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
-        draw_house(screen)
+        #josh zickermann
+        draw_house(screen, 500, 300)
         # DRAW CODE END
  
         # Update the screen with what we've drawn.
