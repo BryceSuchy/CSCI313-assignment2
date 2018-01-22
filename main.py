@@ -31,10 +31,27 @@ size = (700, 500)
 GREY = (211,211,211)
 PINK = (255,192,203)
 def draw_cat(screen,x,y):
-            pygame.draw.ellipse(screen, GREY, [50+x,50+y,225,175], 0)
-            pygame.draw.polygon(screen, GREY, [[60+x,100+y], [135+x,55+y], [75+x,20+y]], 0)
-            pygame.draw.polygon(screen, GREY, [[200+x,55+y], [265+x,120+y], [275+x,20+y]], 0)
+            
+            pygame.draw.polygon(screen, GREY, [[60+x,100+y], [125+x,55+y], [60+x,35+y]], 0)#Left Ear
+            pygame.draw.polygon(screen, PINK, [[65+x,100+y], [115+x,65+y], [65+x,50+y]], 0)
+            pygame.draw.polygon(screen, GREY, [[200+x,55+y], [265+x,120+y], [275+x,40+y]], 0)#Right Ear
+            pygame.draw.polygon(screen, PINK, [[225+x,60+y], [255+x,140+y], [265+x,50+y]], 0)
+            pygame.draw.ellipse(screen, GREY, [50+x,50+y,225,175], 0) #head
+            pygame.draw.polygon(screen, PINK, [[140+x,150+y], [185+x,150+y], [162+x,180+y]], 0)#nose
+            pygame.draw.ellipse(screen, WHITE, [90+x,85+y,55,45], 0) #Left Eye
+            pygame.draw.ellipse(screen, BLACK, [96+x,90+y,45,35], 0)
+            pygame.draw.ellipse(screen, WHITE, [110+x,94+y,10,10], 0) #white light speckles
+            pygame.draw.ellipse(screen, WHITE, [123+x,98+y,10,10], 0)
+            pygame.draw.ellipse(screen, WHITE, [122+x,95+y,5,5], 0)
+            z = 90
+            pygame.draw.ellipse(screen, WHITE, [90+x+z,85+y,55,45], 0) #Right Eye
+            pygame.draw.ellipse(screen, BLACK, [96+x+z,90+y,45,35], 0)
+            pygame.draw.ellipse(screen, WHITE, [110+x+z,94+y,10,10], 0) #white light speckles
+            pygame.draw.ellipse(screen, WHITE, [123+x+z,98+y,10,10], 0)
+            pygame.draw.ellipse(screen, WHITE, [122+x+z,95+y,5,5], 0)
 
+            
+            
 
 def main():
     """ Main function for the game. """
