@@ -26,16 +26,32 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 YELLOW = (255,255,0)
+GREY = (211,211,211)
+PINK = (255,192,203)
 
 # Width and height of the screen (width,height)
 size = (700, 500)
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
- 
+# Callahan Stewart
+def draw_cat(screen,x,y):
+            pygame.draw.polygon(screen, GREY, [[60+x,100+y], [125+x,55+y], [60+x,35+y]], 0)#Left Ear
+            pygame.draw.polygon(screen, PINK, [[65+x,100+y], [115+x,65+y], [65+x,50+y]], 0)
+            pygame.draw.polygon(screen, GREY, [[200+x,55+y], [265+x,120+y], [275+x,40+y]], 0)#Right Ear
+            pygame.draw.polygon(screen, PINK, [[225+x,60+y], [255+x,140+y], [265+x,50+y]], 0)
+            pygame.draw.ellipse(screen, GREY, [50+x,50+y,225,175], 0) #head
+            pygame.draw.polygon(screen, PINK, [[140+x,150+y], [185+x,150+y], [162+x,180+y]], 0)#nose
+            pygame.draw.ellipse(screen, WHITE, [90+x,85+y,55,45], 0) #Left Eye
+            pygame.draw.ellipse(screen, BLACK, [96+x,90+y,45,35], 0)
+            pygame.draw.ellipse(screen, WHITE, [110+x,94+y,10,10], 0) #white light speckles
+            pygame.draw.ellipse(screen, WHITE, [123+x,98+y,10,10], 0)
+            pygame.draw.ellipse(screen, WHITE, [122+x,95+y,5,5], 0)
+            z = 90
+            pygame.draw.ellipse(screen, WHITE, [90+x+z,85+y,55,45], 0) #Right Eye
+            pygame.draw.ellipse(screen, BLACK, [96+x+z,90+y,45,35], 0)
+            pygame.draw.ellipse(screen, WHITE, [110+x+z,94+y,10,10], 0) #white light speckles
+            pygame.draw.ellipse(screen, WHITE, [123+x+z,98+y,10,10], 0)
+            pygame.draw.ellipse(screen, WHITE, [122+x+z,95+y,5,5], 0)
+            
 # josh zickermann
 def draw_house(screen, x, y):
     pygame.draw.rect(screen, BLACK, [40+x,40+y,100,100], 2)
@@ -53,7 +69,6 @@ def draw_sun(screen, x, y):
     pygame.draw.polygon(screen, YELLOW, [[275+x, 200+y], [275+x, 320+y], [200+x, 280+y]], 10)
     pygame.draw.line(screen, YELLOW, [215+x, 225+y], [370+x,215+y], 10)
     pygame.draw.line(screen, YELLOW, [215+x, 150+y], [370+x,215+y], 10)
-
 
 def main():
     """ Main function for the game. """
@@ -87,7 +102,7 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
-
+        draw_cat(screen,100,100)
         #josh zickermann
         draw_house(screen, 500, 300)
         draw_sun(screen, 350, -50)
