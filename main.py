@@ -1,8 +1,9 @@
 """
 Assignment 2
-# Your names here
+# Bryce Suchy, Josh Zickermann, and Callahan Stewart
 
-# Give a description of what your new program does
+# This program opens a window and draws a cat, house, and sun
+The program utilizes the basic pygame draw functions
 
 
 Original documentation: (Leave this intact)
