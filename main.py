@@ -32,7 +32,7 @@ GREY = (211,211,211)
 PINK = (255,192,203)
 
 # Width and height of the screen (width,height)
-size = (700, 500)
+size = (1200, 700)
 
 # Callahan Stewart
 def draw_cat(screen,x,y):
@@ -86,6 +86,13 @@ def main():
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
+    # Starting position of the rectangle
+    rect_x = 1000
+    rect_y = -50
+ 
+    # Speed and direction of rectangle
+    rect_change_x = -2
+    rect_change_y = 0
  
     # -------- Main Program Loop -----------
     while not done:
@@ -104,10 +111,17 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
-        draw_cat(screen,100,100)
+        draw_cat(screen,50,400)
         #josh zickermann
-        draw_house(screen, 500, 300)
-        draw_sun(screen, 350, -50)
+        draw_house(screen, 700, 400)
+        if rect_x != -500:
+            draw_sun(screen, rect_x, rect_y)
+        else:
+            rect_x = 1000
+ 
+        # Move the rectangle starting point
+        rect_x += rect_change_x
+        rect_y += rect_change_y
 
         # DRAW CODE END
  
