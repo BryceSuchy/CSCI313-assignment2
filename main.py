@@ -1,9 +1,9 @@
 """
-Assignment 2
+Assignment 3
 # Bryce Suchy, Josh Zickermann, and Callahan Stewart
 
 # This program opens a window and draws a cat, house, and sun
-The program utilizes the basic pygame draw functions
+This program animates both the sun and cat. Also, randomly draws 4 houses.
 
 
 Original documentation: (Leave this intact)
@@ -75,15 +75,9 @@ def draw_sun(screen, x, y):
 
 house_list = []
 
-#for i in range(4):
-    #x = random.randrange(300, 700)
-    ##y = 400
-    #house_list.append([x])
-
 for i in range(4):
-    x = random.randrange(0, 400)
-    #y = random.randrange(0, 400)
-    house_list.append([x])
+    x = random.randrange(0, 1000)
+    house_list.append(x)
 
 
 def main():
@@ -132,21 +126,9 @@ def main():
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
 
-        ##makes new houses
-
-        #for i in range(len(house_list)):
-            #draw_house(screen, x, y)
-
-        #for i in range(len(house_list)):
-            #draw_house(screen, house_list[i], 400)
-        #for i in range(len(house_list)):
-            #draw_house(screen, int(str(house_list[i])), 400)
-            #print(str(i))
-        
+        #makes new houses
         for i in range(len(house_list)):
-            house_list[i]
-            test_number = house_list[i]
-            draw_house(screen, test_number, 400)
+            draw_house(screen, house_list[i], 400)
 
         # cat animation
         draw_cat(screen, cat_x, cat_y)
