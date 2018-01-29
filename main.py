@@ -1,9 +1,9 @@
 """
-Assignment 2
+Assignment 3
 # Bryce Suchy, Josh Zickermann, and Callahan Stewart
 
 # This program opens a window and draws a cat, house, and sun
-The program utilizes the basic pygame draw functions
+This program animates both the sun and cat. Also, randomly draws 4 houses.
 
 
 Original documentation: (Leave this intact)
@@ -20,6 +20,7 @@ Modified slightly by OttoBorchert 1/18/2018
 """
  
 import pygame
+import random
  
 # Define some colors as global constants (can add colors, if you'd like)
 BLACK = (0, 0, 0)
@@ -32,7 +33,7 @@ GREY = (211,211,211)
 PINK = (255,192,203)
 
 # Width and height of the screen (width,height)
-size = (700, 500)
+size = (1200, 700)
 
 # Callahan Stewart
 def draw_cat(screen,x,y):
@@ -72,6 +73,13 @@ def draw_sun(screen, x, y):
     pygame.draw.line(screen, YELLOW, [215+x, 225+y], [370+x,215+y], 10)
     pygame.draw.line(screen, YELLOW, [215+x, 150+y], [370+x,215+y], 10)
 
+house_list = []
+
+for i in range(4):
+    x = random.randrange(0, 1000)
+    house_list.append(x)
+
+
 def main():
     """ Main function for the game. """
     
@@ -83,9 +91,22 @@ def main():
  
     # Loop until the user clicks the close button.
     done = False
- 
+    
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
+    # Starting position of the rectangle
+    rect_x = 1000
+    rect_y = -50
+ 
+    # Speed and direction of rectangle
+    rect_change_x = -2
+    rect_change_y = 0
+
+    ##speed and position of cat
+    cat_x = 5
+    cat_y = 5
+    cat_x_speed = 5
+    cat_y_speed = 5
  
     # -------- Main Program Loop -----------
     while not done:
@@ -104,10 +125,30 @@ def main():
         # First, clear the screen to white. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
-        draw_cat(screen,100,100)
-        #josh zickermann
-        draw_house(screen, 500, 300)
-        draw_sun(screen, 350, -50)
+
+        #makes new houses
+        for i in range(len(house_list)):
+            draw_house(screen, house_list[i], 400)
+
+        # cat animation
+        draw_cat(screen, cat_x, cat_y)
+
+        cat_x += cat_x_speed
+        cat_y += cat_y_speed
+        if cat_y > 450 or cat_y < 0:
+            cat_y_speed = cat_y_speed * -1
+        if cat_x > 650 or cat_x < 0:
+            cat_x_speed = cat_x_speed * -1
+        
+        ## sun animation
+        if rect_x != -500:
+            draw_sun(screen, rect_x, rect_y)
+        else:
+            rect_x = 1000
+ 
+        # Move the rectangle starting point
+        rect_x += rect_change_x
+        rect_y += rect_change_y
 
         # DRAW CODE END
  
