@@ -20,6 +20,7 @@ Modified slightly by OttoBorchert 1/18/2018
 """
  
 import pygame
+import random
  
 # Define some colors as global constants (can add colors, if you'd like)
 BLACK = (0, 0, 0)
@@ -72,6 +73,18 @@ def draw_sun(screen, x, y):
     pygame.draw.line(screen, YELLOW, [215+x, 225+y], [370+x,215+y], 10)
     pygame.draw.line(screen, YELLOW, [215+x, 150+y], [370+x,215+y], 10)
 
+house_list = [4]
+
+for i in range(4):
+    x = random.randrange(300, 700)
+    y = 400
+    house_list.append([x,y])
+
+print(house_list[1][0])
+print(house_list[2][0])
+print(house_list[3][0])
+print(house_list[4][0])
+
 def main():
     """ Main function for the game. """
     
@@ -83,7 +96,7 @@ def main():
  
     # Loop until the user clicks the close button.
     done = False
- 
+    
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
     # Starting position of the rectangle
@@ -112,8 +125,10 @@ def main():
         # above this, or they will be erased with this command.
         screen.fill(WHITE)
         draw_cat(screen,50,400)
-        #josh zickermann
-        draw_house(screen, 700, 400)
+        
+        for i in range(len(house_list)):
+            draw_house(screen, x, y)
+
         if rect_x != -500:
             draw_sun(screen, rect_x, rect_y)
         else:
