@@ -1,11 +1,8 @@
 """
-Assignment 3
+Assignment 5
 # Bryce Suchy, Josh Zickermann, and Callahan Stewart
-
 # This program opens a window and draws a cat, house, and sun
 This program animates both the sun and cat. Also, randomly draws 4 houses.
-
-
 Original documentation: (Leave this intact)
 Pygame base template for opening a window, done with functions
  
@@ -13,7 +10,6 @@ Pygame base template for opening a window, done with functions
  Simpson College Computer Science
  http://programarcadegames.com/
  http://simpson.edu/computer-science/
-
 Source: http://programarcadegames.com/python_examples/show_file.php?file=pygame_base_template_proper.py
 Modified slightly by OttoBorchert 1/18/2018
  
@@ -31,6 +27,7 @@ RED = (255, 0, 0)
 YELLOW = (255,255,0)
 GREY = (211,211,211)
 PINK = (255,192,203)
+BC = (226, 226, 215)
 
 # Width and height of the screen (width,height)
 size = (1200, 700)
@@ -73,6 +70,29 @@ def draw_sun(screen, x, y):
     pygame.draw.line(screen, YELLOW, [215+x, 225+y], [370+x,215+y], 10)
     pygame.draw.line(screen, YELLOW, [215+x, 150+y], [370+x,215+y], 10)
 
+def draw_stick_figure(screen, x, y):
+    # Head
+    pygame.draw.ellipse(screen, BLACK, [1 + x, y, 10, 10], 0)
+ 
+    # Legs
+    pygame.draw.line(screen, BLACK, [5 + x, 17 + y], [10 + x, 27 + y], 2)
+    pygame.draw.line(screen, BLACK, [5 + x, 17 + y], [x, 27 + y], 2)
+ 
+    # Body
+    pygame.draw.line(screen, RED, [5 + x, 17 + y], [5 + x, 7 + y], 2)
+ 
+    # Arms
+    pygame.draw.line(screen, RED, [5 + x, 7 + y], [9 + x, 17 + y], 2)
+    pygame.draw.line(screen, RED, [5 + x, 7 + y], [1 + x, 17 + y], 2)
+
+def draw_snowman(screen, x, y):
+    # Draw a circle for the head
+    pygame.draw.ellipse(screen, WHITE, [35 + x, y, 25, 25])
+    # Draw the middle snowman circle
+    pygame.draw.ellipse(screen, WHITE, [23 + x, 20 + y, 50, 50])
+    # Draw the bottom snowman circle
+    pygame.draw.ellipse(screen, WHITE, [x, 65 + y, 100, 100])
+
 house_list = []
 
 for i in range(4):
@@ -94,37 +114,88 @@ def main():
     
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
-    # Starting position of the rectangle
-    rect_x = 1000
-    rect_y = -50
+    # Starting position of the sun
+    sun_x = 1000
+    sun_y = -50
  
-    # Speed and direction of rectangle
-    rect_change_x = -2
-    rect_change_y = 0
+    # Speed and direction of sun
+    sun_change_x = -2
+    sun_change_y = 0
 
     ##speed and position of cat
     cat_x = 5
     cat_y = 5
     cat_x_speed = 5
     cat_y_speed = 5
+
+    # Speed in pixels per frame
+    x_speed = 0
+    y_speed = 0
+ 
+    # Current position
+    x_coord = 10
+    y_coord = 500
+
+    pygame.mouse.set_visible(0)
+
+    font = pygame.font.Font(None , 25)
  
     # -------- Main Program Loop -----------
     while not done:
         # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
+        pos = pygame.mouse.get_pos()
+        x_mouse = pos[0]
+        y_mouse = pos[1]
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+
+            elif event.type == pygame.KEYDOWN:
+                # Figure out if it was an arrow key. If so
+                # adjust speed.
+                if event.key == pygame.K_LEFT:
+                    x_speed = -3
+                elif event.key == pygame.K_RIGHT:
+                    x_speed = 3
+                elif event.key == pygame.K_UP:
+                    y_speed = -3
+                elif event.key == pygame.K_DOWN:
+                    y_speed = 3
+                elif event.key == pygame.K_SPACE:
+                    y_coord = y_coord - 50
+ 
+            # User let up on a key
+            elif event.type == pygame.KEYUP:
+                # If it is an arrow key, reset vector back to zero
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    x_speed = 0
+                elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    y_speed = 0
         # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
  
         # GAME LOGIC BEGIN
- 
+        if x_coord > 1100:
+            x_coord = x_coord - 1
+        elif y_coord > 680:
+            y_coord = y_coord - 1
+        elif x_coord < 0:
+            x_coord = x_coord + 1
+        elif y_coord < 510:
+            y_coord = y_coord + 1
+        else:
+            x_coord = x_coord + x_speed
+            y_coord = y_coord + y_speed
+    
         # GAME LOGIC END
  
         # DRAW CODE BEGIN
  
-        # First, clear the screen to white. Don't put other drawing commands
+        # First, clear the screen to custom color. Don't put other drawing commands
         # above this, or they will be erased with this command.
-        screen.fill(WHITE)
+        screen.fill(BC)
+
+        pygame.draw.rect(screen, GREEN, [0,540,1200,200], 0)
 
         #makes new houses
         for i in range(len(house_list)):
@@ -140,15 +211,39 @@ def main():
         if cat_x > 650 or cat_x < 0:
             cat_x_speed = cat_x_speed * -1
         
-        ## sun animation
-        if rect_x != -500:
-            draw_sun(screen, rect_x, rect_y)
+        # sun animation
+        if sun_x != -500:
+            draw_sun(screen, sun_x, sun_y)
         else:
-            rect_x = 1000
+            sun_x = 1000
  
-        # Move the rectangle starting point
-        rect_x += rect_change_x
-        rect_y += rect_change_y
+        # Move the sun's starting point
+        sun_x += sun_change_x
+        sun_y += sun_change_y
+
+        draw_stick_figure(screen, x_coord, y_coord)
+        
+        if x_mouse > 1000:
+            x_mouse = 1000
+        elif y_mouse > 680:
+            y_mouse = 500
+        draw_snowman(screen, x_mouse, y_mouse)
+
+        output_string = "Controls: Up-key = Stickman goes up"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 50])
+        output_string = "Down-key = Stickman goes down"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 65])
+        output_string = "Left-key = Stickman goes left"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 80])
+        output_string = "Right-key = Stickman goes right"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 95])
+        output_string = "Space bar = Stickman jumps"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 110])
 
         # DRAW CODE END
  
