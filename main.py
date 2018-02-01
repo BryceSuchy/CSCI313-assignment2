@@ -1,9 +1,11 @@
 """
-Assignment 3
+Assignment 4
 # Bryce Suchy, Josh Zickermann, and Callahan Stewart
 
 # This program opens a window and draws a cat, house, and sun
 This program animates both the sun and cat. Also, randomly draws 4 houses.
+This program allows the user to controll a little stick man using arrow keys,
+and it allows the user to controll a snowman with the mouse.
 
 
 Original documentation: (Leave this intact)
