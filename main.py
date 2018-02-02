@@ -31,6 +31,7 @@ BC = (226, 226, 215)
 
 # Width and height of the screen (width,height)
 size = (1200, 700)
+background_position = [0, 0]
 
 # Callahan Stewart
 def draw_cat(screen,x,y):
@@ -85,14 +86,6 @@ def draw_stick_figure(screen, x, y):
     pygame.draw.line(screen, RED, [5 + x, 7 + y], [9 + x, 17 + y], 2)
     pygame.draw.line(screen, RED, [5 + x, 7 + y], [1 + x, 17 + y], 2)
 
-def draw_snowman(screen, x, y):
-    # Draw a circle for the head
-    pygame.draw.ellipse(screen, WHITE, [35 + x, y, 25, 25])
-    # Draw the middle snowman circle
-    pygame.draw.ellipse(screen, WHITE, [23 + x, 20 + y, 50, 50])
-    # Draw the bottom snowman circle
-    pygame.draw.ellipse(screen, WHITE, [x, 65 + y, 100, 100])
-
 house_list = []
 
 for i in range(4):
@@ -136,21 +129,25 @@ def main():
     x_coord = 10
     y_coord = 500
 
-    pygame.mouse.set_visible(0)
+    pygame.mouse.set_visible(10)
+    player_image = pygame.image.load("images/santa.png").convert()
+    background_image = pygame.image.load("images/SnowMoon2.png").convert()
+    background_sound = pygame.mixer.music.load("sounds/JingleBells.mid")
+    background_sound = pygame.mixer.music.play(loops = 40, start=0.0)
+    #click_sound_lion = pygame.mixer.Sound("sounds/lion.wav")
+    cat_image = pygame.image.load("images/tiger.png").convert()
 
     font = pygame.font.Font(None , 25)
  
     # -------- Main Program Loop -----------
     while not done:
         # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
-        pos = pygame.mouse.get_pos()
-        x_mouse = pos[0]
-        y_mouse = pos[1]
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-
+            #elif event.type == pygame.MOUSEBUTTONDOWN:
+             #   pygame.mixer.Sound.play(click_sound_lion)
             elif event.type == pygame.KEYDOWN:
                 # Figure out if it was an arrow key. If so
                 # adjust speed.
@@ -173,8 +170,11 @@ def main():
                 elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     y_speed = 0
         # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
+        
  
         # GAME LOGIC BEGIN
+
+        # Screen boundaries
         if x_coord > 1100:
             x_coord = x_coord - 1
         elif y_coord > 680:
@@ -194,15 +194,17 @@ def main():
         # First, clear the screen to custom color. Don't put other drawing commands
         # above this, or they will be erased with this command.
         screen.fill(BC)
+        screen.blit(background_image, background_position)
 
-        pygame.draw.rect(screen, GREEN, [0,540,1200,200], 0)
+        pygame.draw.rect(screen, WHITE, [0,540,1200,200], 0)
 
         #makes new houses
         for i in range(len(house_list)):
             draw_house(screen, house_list[i], 400)
 
         # cat animation
-        draw_cat(screen, cat_x, cat_y)
+        screen.blit(cat_image, [cat_x, cat_y])
+        #draw_cat(screen, cat_x, cat_y)
 
         cat_x += cat_x_speed
         cat_y += cat_y_speed
@@ -221,13 +223,9 @@ def main():
         sun_x += sun_change_x
         sun_y += sun_change_y
 
-        draw_stick_figure(screen, x_coord, y_coord)
-        
-        if x_mouse > 1000:
-            x_mouse = 1000
-        elif y_mouse > 680:
-            y_mouse = 500
-        draw_snowman(screen, x_mouse, y_mouse)
+        #draw_stick_figure(screen, x_coord, y_coord)
+        screen.blit(player_image, [x_coord, y_coord])
+        #draw_stick_figure = player_image
 
         output_string = "Controls: Up-key = Stickman goes up"
         text = font.render(output_string, True, BLACK)
