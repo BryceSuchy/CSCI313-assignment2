@@ -9,11 +9,11 @@ The following graphics and Sound was used for this project:
 graphics:
 "tiger-head" from https://www.freeclipartnow.com/animals/tigers/tiger-head.jpg.html
 
-"pengo" from Laetissima in https://opengameart.org/content/penguins
+"john doe" from Reiner in http://www.reinerstilesets.de/graphics/2d-grafiken/2d-humans/
 
-"astronomy-beautiful-clouds-constellation-355465" from Pixabat in https://www.pexels.com/photo/astronomy-beautiful-clouds-constellation-355465/
+"Winter Background , parexel scrolling" from pechvogel in https://opengameart.org/content/winter-background-parexel-scrolling
 
 sounds:
-lion.wav from IFartInUrGeneralDirection in http://www.freesound.org/usersViewSingle.php?id=384275
+"Lion Sound Effect" from unknown in https://www.partnersinrhyme.com/soundfx/BigCats_sounds/lion_lion_wav.shtml
 
-JingleBells.mid from unknown in http://www.beatsuite.com/music/detail/jingle-bells-3/3597
+"Jingle Bells (Christmas Carols)" from unknown in http://www.midiworld.com/files/1130/
