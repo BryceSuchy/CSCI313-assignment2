@@ -87,8 +87,8 @@ def draw_stick_figure(screen, x, y):
     pygame.draw.line(screen, RED, [5 + x, 7 + y], [1 + x, 17 + y], 2)
 
 house_list = []
-
-for i in range(4):
+numOfHouses = 4
+for i in range(numOfHouses):
     x = random.randrange(0, 1000)
     house_list.append(x)
 
@@ -134,20 +134,18 @@ def main():
     background_image = pygame.image.load("images/SnowMoon2.png").convert()
     background_sound = pygame.mixer.music.load("sounds/JingleBells.mid")
     background_sound = pygame.mixer.music.play(loops = 40, start=0.0)
-    #click_sound_lion = pygame.mixer.Sound("sounds/lion.wav")
+    click_sound_lion = pygame.mixer.Sound("sounds/lion.wav")
     cat_image = pygame.image.load("images/tiger.png").convert()
 
     font = pygame.font.Font(None , 25)
  
     # -------- Main Program Loop -----------
+    tigerProvokes = 0 #this is the number of times you provoke the tiger
     while not done:
         # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-            #elif event.type == pygame.MOUSEBUTTONDOWN:
-             #   pygame.mixer.Sound.play(click_sound_lion)
             elif event.type == pygame.KEYDOWN:
                 # Figure out if it was an arrow key. If so
                 # adjust speed.
@@ -161,6 +159,13 @@ def main():
                     y_speed = 3
                 elif event.key == pygame.K_SPACE:
                     y_coord = y_coord - 50
+                elif event.key == pygame.K_p:
+                    pygame.mixer.Sound.play(click_sound_lion)
+                    if tigerProvokes is not numOfHouses:
+                        tigerProvokes += 1
+                elif event.key == pygame.K_o:
+                    if tigerProvokes is not 0:
+                        tigerProvokes += -1
  
             # User let up on a key
             elif event.type == pygame.KEYUP:
@@ -181,7 +186,7 @@ def main():
             y_coord = y_coord - 1
         elif x_coord < 0:
             x_coord = x_coord + 1
-        elif y_coord < 510:
+        elif y_coord < 400:
             y_coord = y_coord + 1
         else:
             x_coord = x_coord + x_speed
@@ -199,7 +204,7 @@ def main():
         pygame.draw.rect(screen, WHITE, [0,540,1200,200], 0)
 
         #makes new houses
-        for i in range(len(house_list)):
+        for i in range(len(house_list)- tigerProvokes):
             draw_house(screen, house_list[i], 400)
 
         # cat animation
@@ -242,6 +247,12 @@ def main():
         output_string = "Space bar = Stickman jumps"
         text = font.render(output_string, True, BLACK)
         screen.blit(text, [800, 110])
+        output_string = "P-key = Provoke Tiger"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 125])
+        output_string = "O-key = Rebuild"
+        text = font.render(output_string, True, BLACK)
+        screen.blit(text, [800, 140])
 
         # DRAW CODE END
  
